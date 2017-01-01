@@ -102,7 +102,7 @@ export default {
     this.RealTime()
     this.pointeuse.datetime = moment().format('LLLL')
     this.WorkTime()
-    // this.$http.post('/worktimes', this.worktime)
+    this.$http.post('/worktimes', this.worktime)
   }
 }
 </script>
