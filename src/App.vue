@@ -69,6 +69,7 @@ export default {
     this.$store.dispatch('getBudgets')
     this.$store.dispatch('getEvents')
     this.$store.dispatch('getVerifications')
+    this.$store.dispatch('getMaintenances')
     /* window.onbeforeunload = function () {
       let msg = 'test'
       return msg

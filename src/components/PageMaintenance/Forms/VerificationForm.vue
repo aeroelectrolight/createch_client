@@ -15,11 +15,11 @@
     <form class="ui form">
       <div class="ui grid">
         <div class="ui four wide column">
-          <div :class="{ 'field': true, 'error': errors.body.fields.verifications_designation }">
+          <div :class="{ 'field': true, 'error': errors.fields.verifications_designation }">
             <label for="compte">Designation :</label>
             <input type="text" v-model="designation">
-            <div class="ui pointing red basic label" v-if="errors.body.fields.verifications_designation">
-              {{ errors.body.fields.verifications_designation }}
+            <div class="ui pointing red basic label" v-if="errors.fields.verifications_designation">
+              {{ errors.fields.verifications_designation }}
             </div>
           </div>
         </div>
@@ -30,29 +30,29 @@
           <datepicker :value="nextVisite" name="Prochaine visite" :timevisible="false" @onchange="NewNextVisite"></datepicker>
         </div>
         <div class="ui four wide column">
-          <div :class="{ 'field': true, 'error': errors.body.fields.verifications_organism }">
+          <div :class="{ 'field': true, 'error': errors.fields.verifications_organism }">
             <label for="compte">Organisme vérificateur :</label>
             <input type="text" v-model="organism">
-            <div class="ui pointing red basic label" v-if="errors.body.fields.verifications_organism">
-              {{ errors.body.fields.verifications_organism }}
+            <div class="ui pointing red basic label" v-if="errors.fields.verifications_organism">
+              {{ errors.fields.verifications_organism }}
             </div>
           </div>
         </div>
         <div class="ui two wide column">
-          <div :class="{ 'field': true, 'error': errors.body.fields.verifications_alertDelay }">
+          <div :class="{ 'field': true, 'error': errors.fields.verifications_alertDelay }">
             <label for="compte">Delai d'alerte en jour :</label>
             <input type="text" v-model="alertDelay">
-            <div class="ui pointing red basic label" v-if="errors.body.fields.verifications_alertDelay">
-              {{ errors.body.fields.verifications_alertDelay }}
+            <div class="ui pointing red basic label" v-if="errors.fields.verifications_alertDelay">
+              {{ errors.fields.verifications_alertDelay }}
             </div>
           </div>
         </div>
         <div class="ui two wide column">
-          <div :class="{ 'field': true, 'error': errors.body.fields.verifications_periodicity }">
+          <div :class="{ 'field': true, 'error': errors.fields.verifications_periodicity }">
             <label for="compte">Périodicité en mois :</label>
             <input type="text" v-model="periodicity">
-            <div class="ui pointing red basic label" v-if="errors.body.fields.verifications_periodicity">
-              {{ errors.body.fields.verifications_periodicity }}
+            <div class="ui pointing red basic label" v-if="errors.fields.verifications_periodicity">
+              {{ errors.fields.verifications_periodicity }}
             </div>
           </div>
         </div>
@@ -92,15 +92,13 @@ export default {
       alertDelay: 15,
       periodicity: 12,
       errors: {
-        body: {
-          fields: {
-            verifications_designation: '',
-            verifications_lastvisite: '',
-            verifications_nextvisite: '',
-            verifications_organism: '',
-            verifications_alertdelay: '',
-            verifications_periodicity: ''
-          }
+        fields: {
+          verifications_designation: '',
+          verifications_lastvisite: '',
+          verifications_nextvisite: '',
+          verifications_organism: '',
+          verifications_alertdelay: '',
+          verifications_periodicity: ''
         }
       }
     }
@@ -147,8 +145,8 @@ export default {
             periodicity: this.periodicity
           }
         }).catch((err) => {
-          console.log(err)
-          this.errors = err
+          console.log(err.response)
+          this.errors = err.response.data
         }).then((response) => {
           if (response) {
             this.ClearForm()
@@ -163,8 +161,8 @@ export default {
           alertDelay: this.alertDelay,
           periodicity: this.periodicity
         }).catch((err) => {
-          console.log(err)
-          this.errors = err
+          console.log(err.response)
+          this.errors = err.response.data
         }).then((response) => {
           if (response) {
             this.ClearForm()
@@ -186,7 +184,7 @@ export default {
       this.organism = ''
       this.alertDelay = 15
       this.periodicity = 12
-      this.errors.body.fields = {
+      this.errors.fields = {
         verifications_designation: '',
         verifications_lastvisite: '',
         verifications_nextvisite: '',
