@@ -31,6 +31,7 @@ module.exports = {
       '/budgets': 'http://localhost:8000/api',
       '/events': 'http://localhost:8000/api',
       '/verifications': 'http://localhost:8000/api',
+      '/maintenances': 'http://localhost:8000/api',
       '/worktimes': 'http://localhost:8000/api'
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

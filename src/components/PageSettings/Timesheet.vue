@@ -26,13 +26,23 @@
         </div>
       </div>
     </div>
-    <div class="ui celled list">
-      <div class="item" v-for="ligne in allTimesheetFormated">
-        <i class="large middle aligned icon green checked calendar" v-if="ligne.direction === 'startday'"></i>
-        <i class="large middle aligned icon red delete calendar" v-if="ligne.direction === 'stopday'"></i>
-        <div class="content">
-          <div class="header">{{ ligne.direction }}</div>
-          {{ ligne.timeclock }}
+    <div class="ui three column centered grid">
+      <div class="column">
+        <div class="ui middle aligned celled list">
+          <div class="item" v-for="ligne in allTimesheetFormated">
+            <div class="right floated content" v-if="ligne.direction !== 'startday' && ligne.direction !== 'stopday'">
+              <a class="ui red basic circular label" @click="RemoveTimesheet(ligne.id)">
+                <i class="icon large remove circle"></i>
+                remove : {{ ligne.direction }}
+              </a>
+            </div>
+            <i class="large icon middle aligned green checked calendar" v-if="ligne.direction === 'startday'"></i>
+            <i class="large middle aligned icon red delete calendar" v-if="ligne.direction === 'stopday'"></i>
+            <div class="content">
+              <div class="header">{{ ligne.direction }}</div>
+              {{ ligne.timeclock }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -57,10 +67,10 @@ export default {
   computed: {
     allTimesheetFormated () {
       let array = []
-      this.allTimesheet.forEach((e) => {
-        let date = moment(e.timeclock).format('LLLL')
-        e.timeclock = date
-        array.push(e)
+      array.push(...this.allTimesheet)
+      array.forEach((e) => {
+        let date = moment(e.timeclock)
+        e.timeclock = date.format('LLLL')
       })
       return array
     }
@@ -81,10 +91,17 @@ export default {
       this.dateout = val
     },
     SetAllTimesheet () {
-      this.$http.get('/worktimes/date/' + this.datein + ',' + this.dateout).then((response) => {
+      this.axios.get('/worktimes/date/' + this.datein + ',' + this.dateout).then((response) => {
         this.allTimesheet = response.data
-      }, (err) => {
-        console.log(err)
+      }).catch((err) => {
+        console.log(err.response)
+      })
+    },
+    RemoveTimesheet (val) {
+      this.axios.delete('/worktimes/' + val).then((response) => {
+        this.SetAllTimesheet()
+      }).catch((err) => {
+        console.log(err.response)
       })
     }
   },
