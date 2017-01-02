@@ -64,8 +64,8 @@ export default {
         this.addFonction({
           title: this.title
         }).catch((err) => {
-          this.errors = err.data
-          console.log(err)
+          this.errors = err.response.data
+          console.log(err.response)
         }).then((response) => {
           if (response) {
             this.title = ''
@@ -79,7 +79,8 @@ export default {
             title: this.title
           }
         }).catch((err) => {
-          this.errors = err.data
+          this.errors = err.response.data
+          console.log(err.response)
         }).then((response) => {
           if (response) {
             this.title = ''

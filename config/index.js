@@ -22,17 +22,17 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/couleurs': 'http://localhost:8000/api',
-      '/fonctions': 'http://localhost:8000/api',
-      '/groupes': 'http://localhost:8000/api',
-      '/conventions': 'http://localhost:8000/api',
-      '/places': 'http://localhost:8000/api',
-      '/personnels': 'http://localhost:8000/api',
-      '/budgets': 'http://localhost:8000/api',
-      '/events': 'http://localhost:8000/api',
-      '/verifications': 'http://localhost:8000/api',
-      '/maintenances': 'http://localhost:8000/api',
-      '/worktimes': 'http://localhost:8000/api'
+      '/api/couleurs': 'http://localhost:8000',
+      '/api/fonctions': 'http://localhost:8000',
+      '/api/groupes': 'http://localhost:8000',
+      '/api/conventions': 'http://localhost:8000',
+      '/api/places': 'http://localhost:8000',
+      '/api/personnels': 'http://localhost:8000',
+      '/api/budgets': 'http://localhost:8000',
+      '/api/events': 'http://localhost:8000',
+      '/api/verifications': 'http://localhost:8000',
+      '/api/maintenances': 'http://localhost:8000',
+      '/api/worktimes': 'http://localhost:8000'
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

@@ -296,8 +296,8 @@ export default {
             rib: this.rib
           }
         }).catch((err) => {
-          console.log(err)
-          this.errors = err.data
+          console.log(err.response)
+          this.errors = err.response.data
         }).then((response) => {
           if (response) {
             this.clean()

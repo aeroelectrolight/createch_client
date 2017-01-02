@@ -158,7 +158,7 @@ export default {
             category: this.category
           }
         }).catch((err) => {
-          console.log(err)
+          console.log(err.response)
           this.errors = err.response.data
         }).then((response) => {
         })
@@ -172,7 +172,7 @@ export default {
           description: this.description,
           category: this.category
         }).catch((err) => {
-          console.log(err)
+          console.log(err.response)
           this.errors = err.response.data
         }).then((response) => {
 

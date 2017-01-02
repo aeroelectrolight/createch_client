@@ -8,6 +8,7 @@ import VueAxios from 'vue-axios'
 import {router} from './router.js'
 
 // import '../semantic/dist/semantic.min.css'
+axios.defaults.baseURL = '/api'
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
