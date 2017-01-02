@@ -211,8 +211,8 @@ export default {
           nbrJMaxConse: this.nbrJMaxConse,
           tpsRepoHebdo: this.tpsRepoHebdo
         }).catch((err) => {
-          console.log(err)
-          this.errors = err.data
+          console.log(err.response)
+          this.errors = err.response.data
         }).then((response) => {
           if (response) {
             this.$emit('closed')
@@ -236,8 +236,8 @@ export default {
             tpsRepoHebdo: this.tpsRepoHebdo
           }
         }).catch((err) => {
-          console.log(err)
-          this.errors = err.data
+          console.log(err.response)
+          this.errors = err.response.data
         }).then((response) => {
           if (response) {
             this.$emit('closed')

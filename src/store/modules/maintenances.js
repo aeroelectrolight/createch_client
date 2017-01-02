@@ -1,8 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = ''
-
-let intro = ''
+axios.defaults.baseURL = '/api'
 
 export const state = {
   verifications: [],
@@ -17,48 +15,48 @@ export const getters = {
 export const actions = {
   /* VERIFICATIONS */
   getVerifications (store) {
-    return axios.get(intro + '/verifications').then((response) => {
+    return axios.get('/verifications').then((response) => {
       store.commit('ADD_VERIFICATIONS', response.data)
     })
   },
   addVerification: function (store, verification) {
-    return axios.post(intro + '/verifications', verification).then((response) => {
+    return axios.post('/verifications', verification).then((response) => {
       console.log(response)
       store.commit('ADD_VERIFICATION', response.data)
       return response
     })
   },
   modifyVerification: function (store, {id, verification}) {
-    return axios.put(intro + '/verifications/' + id, verification).then((response) => {
+    return axios.put('/verifications/' + id, verification).then((response) => {
       store.commit('MODIFY_VERIFICATION', response.data)
       return response
     })
   },
   deleteVerification: function (store, id) {
-    return axios.delete(intro + '/verifications/' + id).then((response) => {
+    return axios.delete('/verifications/' + id).then((response) => {
       store.commit('DELETE_VERIFICATION', id)
     })
   },
   /* MAINTENANCES */
   getMaintenances (store) {
-    return axios.get(intro + '/maintenances').then((response) => {
+    return axios.get('/maintenances').then((response) => {
       store.commit('ADD_MAINTENANCES', response.data)
     })
   },
   addMaintenance: function (store, maintenance) {
-    return axios.post(intro + '/maintenances', maintenance).then((response) => {
+    return axios.post('/maintenances', maintenance).then((response) => {
       store.commit('ADD_MAINTENANCE', response.data)
       return response
     })
   },
   modifyMaintenance: function (store, {id, maintenance}) {
-    return axios.put(intro + '/maintenances/' + id, maintenance).then((response) => {
+    return axios.put('/maintenances/' + id, maintenance).then((response) => {
       store.commit('MODIFY_MAINTENANCE', response.data)
       return response
     })
   },
   deleteMaintenance: function (store, id) {
-    return axios.delete(intro + '/maintenances/' + id).then((response) => {
+    return axios.delete('/maintenances/' + id).then((response) => {
       store.commit('DELETE_MAINTENANCE', id)
     })
   }

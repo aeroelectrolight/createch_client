@@ -97,7 +97,8 @@ export default {
           fonctions: this.groupfunctions,
           couleur: this.groupcolor
         }).catch((err) => {
-          this.errors = err.data
+          this.errors = err.response.data
+          console.log(err.response)
         }).then((response) => {
           if (response) {
             this.grouptitle = ''
@@ -115,7 +116,8 @@ export default {
             couleur: this.groupcolor
           }
         }).catch((err) => {
-          this.errors = err.data
+          this.errors = err.response.data
+          console.log(err.response)
         }).then((response) => {
           if (response) {
             this.grouptitle = ''

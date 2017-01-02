@@ -136,8 +136,8 @@ export default {
           ville: this.ville,
           telephone: this.telephone
         }).catch((err) => {
-          console.log(err)
-          this.errors = err.data
+          console.log(err.response)
+          this.errors = err.response.data
         }).then((response) => {
           if (response) {
             this.title = ''
@@ -161,8 +161,8 @@ export default {
             telephone: this.telephone
           }
         }).catch((err) => {
-          console.log(err)
-          this.errors = err.data
+          console.log(err.response)
+          this.errors = err.response.data
         }).then((response) => {
           if (response) {
             this.title = ''

@@ -204,8 +204,8 @@ export default {
             events: this.eventId
           }
         }).catch((err) => {
-          console.log(err)
-          this.errors = err.data
+          console.log(err.response)
+          this.errors = err.response.data
         }).then((response) => {
           if (response) {
             this.reloadEvent()
@@ -225,8 +225,8 @@ export default {
           tarifh: this.tarifh,
           events: this.eventId
         }).catch((err) => {
-          console.log(err)
-          this.errors = err.data
+          console.log(err.response)
+          this.errors = err.response.data
         }).then((response) => {
           if (response) {
             this.reloadEvent()

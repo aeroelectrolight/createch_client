@@ -1,4 +1,4 @@
-<style>
+.response<style>
 </style>
 
 <template>
@@ -79,8 +79,8 @@ export default {
             couleur: this.colors.hex
           }
         }).catch((err) => {
-          console.log(err)
-          this.errors = err.data
+          console.log(err.response)
+          this.errors = err.response.data
         }).then((response) => {
           if (response) {
             this.errors.fields.couleur_title = ''
@@ -94,8 +94,8 @@ export default {
           title: this.colorName,
           couleur: this.colors.hex
         }).catch((err) => {
-          console.log(err)
-          this.errors = err.data
+          console.log(err.response)
+          this.errors = err.response.data
         }).then((response) => {
           if (response) {
             this.errors.fields.couleur_title = ''
