@@ -33,14 +33,14 @@
             <div class="right floated content" v-if="ligne.direction !== 'startday' && ligne.direction !== 'stopday'">
               <a class="ui red basic circular label" @click="RemoveTimesheet(ligne.id)">
                 <i class="icon large remove circle"></i>
-                remove : {{ ligne.direction }}
+                remove : {{ ligne.direction }} : {{ ligne.timeclock.format('LT') }}
               </a>
             </div>
             <i class="large icon middle aligned green checked calendar" v-if="ligne.direction === 'startday'"></i>
             <i class="large middle aligned icon red delete calendar" v-if="ligne.direction === 'stopday'"></i>
             <div class="content">
               <div class="header">{{ ligne.direction }}</div>
-              {{ ligne.timeclock }}
+              {{ ligne.timeclock.format('LLLL') }}
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@ export default {
   data () {
     return {
       allTimesheet: [],
-      datein: moment().subtract(10, 'days').format('YYYY-MM-DD'),
+      datein: moment().subtract(30, 'days').format('YYYY-MM-DD'),
       dateout: moment().add(1, 'days').format('YYYY-MM-DD')
     }
   },
@@ -70,7 +70,7 @@ export default {
       array.push(...this.allTimesheet)
       array.forEach((e) => {
         let date = moment(e.timeclock)
-        e.timeclock = date.format('LLLL')
+        e.timeclock = date
       })
       return array
     }
@@ -98,11 +98,13 @@ export default {
       })
     },
     RemoveTimesheet (val) {
-      this.axios.delete('/worktimes/' + val).then((response) => {
-        this.SetAllTimesheet()
-      }).catch((err) => {
-        console.log(err.response)
-      })
+      if (window.confirm('êtes vous certain de vouloir supprimer cette ligne ?')) {
+        this.axios.delete('/worktimes/' + val).then((response) => {
+          this.SetAllTimesheet()
+        }).catch((err) => {
+          console.log(err.response)
+        })
+      }
     }
   },
   mounted () {
