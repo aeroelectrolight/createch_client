@@ -57,7 +57,7 @@
         <table class="ui small celled table">
           <thead>
             <tr>
-              <th colspan="6" class="center"><i class="icon configure"></i>Batîment</th>
+              <th colspan="6" class="center"><i class="icon configure"></i>Matériel</th>
             </tr>
             <tr>
               <th>Titre</th>

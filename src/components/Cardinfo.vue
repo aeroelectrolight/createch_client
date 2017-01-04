@@ -86,14 +86,14 @@ export default {
     StopWorkTime (dir) {
       this.worktime.timeclock = moment().format('YYYY-MM-DD HH:mm')
       this.worktime.direction = dir
-      this.$http.post('/worktimes', this.worktime)
+      this.axios.post('/worktimes', this.worktime)
       this.startButton = true
       this.stopButton = false
     },
     StartWorkTime () {
       this.worktime.timeclock = moment().format('YYYY-MM-DD HH:mm')
       this.worktime.direction = 'start'
-      this.$http.post('/worktimes', this.worktime)
+      this.axios.post('/worktimes', this.worktime)
       this.startButton = false
       this.stopButton = true
     }
@@ -102,7 +102,7 @@ export default {
     this.RealTime()
     this.pointeuse.datetime = moment().format('LLLL')
     this.WorkTime()
-    this.$http.post('/worktimes', this.worktime)
+    this.axios.post('/worktimes', this.worktime)
   }
 }
 </script>

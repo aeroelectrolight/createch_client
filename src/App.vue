@@ -55,11 +55,12 @@ body {
 
 <script>
 import cardinfo from 'src/components/Cardinfo.vue'
+
 export default {
   components: {
     cardinfo: cardinfo
   },
-  mounted () {
+  beforeMount () {
     this.$store.dispatch('getCouleurs')
     this.$store.dispatch('getFonctions')
     this.$store.dispatch('getGroupes')
@@ -74,8 +75,6 @@ export default {
       let msg = 'test'
       return msg
     }
-  },
-  methods: {
   }
 }
 </script>
