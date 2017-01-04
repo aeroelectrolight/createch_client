@@ -21,7 +21,6 @@ export const actions = {
   },
   addVerification: function (store, verification) {
     return axios.post('/verifications', verification).then((response) => {
-      console.log(response)
       store.commit('ADD_VERIFICATION', response.data)
       return response
     })
