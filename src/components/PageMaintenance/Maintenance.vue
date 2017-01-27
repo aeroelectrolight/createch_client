@@ -44,10 +44,10 @@
           <tbody>
             <tr v-for="ligne in maintenances" v-if="ligne.category === 'batiment'" :class="ligne.class_positive">
               <td v-html="ligne.title_html" @click="UdpdateId(ligne.id)" class="createch-cursor"></td>
-              <td>{{ ligne.date_origin }}</td>
-              <td :class="ligne.class_date_visit">{{ ligne.date_visit }}</td>
-              <td :class="ligne.class_date_work">{{ ligne.date_work }}</td>
-              <td :class="ligne.class_date_resolved">{{ ligne.date_resolved}}</td>
+              <td>{{ ligne.date_origin.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_visit">{{ ligne.date_visit.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_work">{{ ligne.date_work.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_resolved">{{ ligne.date_resolved.format('DD/MM/YYYY') }}</td>
               <td>{{ ligne.description }}</td>
             </tr>
           </tbody>
@@ -71,10 +71,10 @@
           <tbody>
             <tr v-for="ligne in maintenances" v-if="ligne.category === 'materiel'" :class="ligne.class_positive">
               <td v-html="ligne.title_html" @click="UdpdateId(ligne.id)" class="createch-cursor"></td>
-              <td>{{ ligne.date_origin }}</td>
-              <td :class="ligne.class_date_visit">{{ ligne.date_visit }}</td>
-              <td :class="ligne.class_date_work">{{ ligne.date_work }}</td>
-              <td :class="ligne.class_date_resolved">{{ ligne.date_resolved}}</td>
+              <td>{{ ligne.date_origin.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_visit">{{ ligne.date_visit.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_work">{{ ligne.date_work.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_resolved">{{ ligne.date_resolved.format('DD/MM/YYYY') }}</td>
               <td>{{ ligne.description }}</td>
             </tr>
           </tbody>
@@ -101,20 +101,19 @@ export default {
     maintenances () {
       let all = this.$store.getters.maintenances
       all.forEach((e) => {
-        if (moment(e.date_resolved) <= moment(e.date_origin)) {
-          let dateOrigin = moment(e.date_origin)
+        e.date_origin = moment(e.date_origin)
+        e.date_visit = moment(e.date_visit)
+        e.date_work = moment(e.date_work)
+        e.date_resolved = moment(e.date_resolved)
+        if (e.date_resolved <= e.date_origin) {
           e.title_html = '<a href="#form_maintenance">' + e.title + '</a>'
-          moment(e.date_visit) <= dateOrigin ? e.class_date_visit = 'warning' : ''
-          moment(e.date_work) <= dateOrigin ? e.class_date_work = 'warning' : ''
+          e.date_visit <= e.date_origin ? e.class_date_visit = 'warning' : ''
+          e.date_work <= e.date_origin ? e.class_date_work = 'warning' : ''
           e.class_date_resolved = 'error'
         } else {
           e.title_html = '<i class="large green checkmark icon"></i>'
           e.class_positive = 'positive'
         }
-        e.date_origin = moment(e.date_origin).format('DD/MM/YYYY')
-        e.date_visit = moment(e.date_visit).format('DD/MM/YYYY')
-        e.date_work = moment(e.date_work).format('DD/MM/YYYY')
-        e.date_resolved = moment(e.date_resolved).format('DD/MM/YYYY')
       })
       return all
     }

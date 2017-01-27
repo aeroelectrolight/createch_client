@@ -85,10 +85,6 @@ export default {
       }
     }
   },
-  mounted () {
-    this.$store.dispatch('getCouleurs')
-    this.$store.dispatch('getLieux')
-  },
   computed: {
     couleurs () {
       return this.$store.getters.couleurs
