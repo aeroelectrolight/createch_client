@@ -204,7 +204,7 @@
         {{ day }}
       </div>
     </div>
-    <div class="datepicker__days">
+    <div class="datepicker__days" :class="classWeeks">
       <transition-group :name="slideMonth" tag="div">
         <div v-for="month in [month]" :key="month" :class="slideMonth">
           <div class="datepicker__day" :style="{width: (month.getWeekStart() * 41) + 'px'}" >
@@ -267,6 +267,9 @@ export default {
     },
     date_formatted () {
       return this.date_local.format('dddd DD MMM')
+    },
+    classWeeks () {
+      return 'has-' + this.month.getWeeks() + '-weeks'
     }
   },
   watch: {
