@@ -4,7 +4,7 @@
 <template>
   <div class="ui orange segment" id="form_maintenance">
     <h2>
-      Ajout ou édition des maintenances :
+      Ajout ou édition d'une tache de maintenance :
       <div class="ui large pointing below red label" v-if="maintenanceId !== 0">
         <i class="icon warning sign"></i>
         Attention !!! Edition de la maintenance : {{ maintenance.title }}
