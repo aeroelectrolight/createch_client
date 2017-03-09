@@ -45,9 +45,9 @@
             <tr v-for="ligne in maintenances" v-if="ligne.category === 'batiment'" :class="ligne.class_positive">
               <td v-html="ligne.title_html" @click="UdpdateId(ligne.id)" class="createch-cursor"></td>
               <td>{{ ligne.date_origin.format('DD/MM/YYYY') }}</td>
-              <td :class="ligne.class_date_visit">{{ ligne.date_visit.format('DD/MM/YYYY') }}</td>
-              <td :class="ligne.class_date_work">{{ ligne.date_work.format('DD/MM/YYYY') }}</td>
-              <td :class="ligne.class_date_resolved">{{ ligne.date_resolved.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_visit"><i class="icon circle warning" v-if="ligne.class_date_visit == 'warning'"></i>{{ ligne.date_visit.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_work"><i class="icon circle warning" v-if="ligne.class_date_work == 'warning'"></i>{{ ligne.date_work.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_resolved"><i class="icon sign warning" v-if="ligne.class_date_resolved == 'error'"></i>{{ ligne.date_resolved.format('DD/MM/YYYY') }}</td>
               <td>{{ ligne.description }}</td>
             </tr>
           </tbody>
@@ -72,9 +72,9 @@
             <tr v-for="ligne in maintenances" v-if="ligne.category === 'materiel'" :class="ligne.class_positive">
               <td v-html="ligne.title_html" @click="UdpdateId(ligne.id)" class="createch-cursor"></td>
               <td>{{ ligne.date_origin.format('DD/MM/YYYY') }}</td>
-              <td :class="ligne.class_date_visit">{{ ligne.date_visit.format('DD/MM/YYYY') }}</td>
-              <td :class="ligne.class_date_work">{{ ligne.date_work.format('DD/MM/YYYY') }}</td>
-              <td :class="ligne.class_date_resolved">{{ ligne.date_resolved.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_visit"><i class="icon circle warning" v-if="ligne.class_date_visit == 'warning'"></i>{{ ligne.date_visit.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_work"><i class="icon circle warning" v-if="ligne.class_date_work == 'warning'"></i>{{ ligne.date_work.format('DD/MM/YYYY') }}</td>
+              <td :class="ligne.class_date_resolved"><i class="icon sign warning" v-if="ligne.class_date_resolved == 'error'"></i>{{ ligne.date_resolved.format('DD/MM/YYYY') }}</td>
               <td>{{ ligne.description }}</td>
             </tr>
           </tbody>
