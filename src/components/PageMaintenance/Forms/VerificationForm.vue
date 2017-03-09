@@ -5,7 +5,7 @@
 <template>
   <div class="ui orange segment">
     <h2>
-      Ajout ou édition des vérifications
+      Ajout ou édition d'une tache de vérification
       <div class="ui large pointing below red label" v-if="verificationId !== 0">
         <i class="icon warning sign"></i>
         Attention !!! Edition de : {{ verification.designation }}
