@@ -26,11 +26,6 @@
               <div class="six wide field">
                 <datepicker :value="dateout" name="La date de fin : " :timevisible="false" @onchange="newEndDate"></datepicker>
               </div>
-              <div class="six wide createch-center field">
-                <button type="button" class="ui small button olive" @click="LoadEvents">
-                  <i class="icon share"></i>Load
-                </button>
-              </div>
             </div>
           </form>
         </div>
@@ -204,12 +199,14 @@ export default {
       nature: '',
       budgetId: 0,
       eventId: 0,
-      datein: moment().subtract(10, 'days').format('YYYY-MM-DD'),
-      dateout: moment().add(1, 'days').format('YYYY-MM-DD'),
-      events: []
+      datein: moment().format('YYYY-MM-DD'),
+      dateout: moment().add(1, 'year').format('YYYY-MM-DD')
     }
   },
   computed: {
+    events () {
+      return this.$store.getters.events.filter((e) => e.start_datetime >= this.datein && e.start_datetime <= this.dateout)
+    },
     eventIndex () {
       return this.events.findIndex((c) => c.id === this.eventId)
     },
@@ -294,6 +291,11 @@ export default {
       return totalTech.toFixed(2)
     }
   },
+  watch: {
+    datein (val) {
+      this.dateout = moment(val).add(1, 'year').format('YYYY-MM-DD')
+    }
+  },
   methods: {
     ...mapActions([
       'deleteBudget',
@@ -304,15 +306,6 @@ export default {
     },
     newEndDate (val) {
       this.dateout = val
-    },
-    LoadEvents () {
-      this.events = []
-      let array = this.$store.getters.events
-      array.forEach((e) => {
-        if (e.start_datetime >= this.datein && e.start_datetime <= this.dateout) {
-          this.events.push(e)
-        }
-      })
     },
     ShowFormBudget (val) {
       this.nature = val

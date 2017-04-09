@@ -108,7 +108,7 @@ export default {
   data () {
     return {
       dateDebut: moment().format('YYYY-MM-DD'),
-      dateFin: moment().format('YYYY-MM-DD'),
+      dateFin: moment().add(1, 'years').format('YYYY-MM-DD'),
       budgetTrie: [],
       totalEstimAchat: 0,
       totalEstimLoc: 0,
@@ -130,6 +130,11 @@ export default {
       return total.toFixed(2)
     }
   },
+  watch: {
+    dateDebut (val) {
+      this.dateFin = moment(val).add(1, 'years').format('YYYY-MM-DD')
+    }
+  },
   methods: {
     newInDate (val) {
       this.dateDebut = val
@@ -139,7 +144,7 @@ export default {
     },
     CalculBudget () {
       this.budgetTrie = []
-      this.totalAchat = this.totalLoc = this.totalTech = 0
+      this.totalEstimAchat = this.totalEstimLoc = this.totalEstimTech = this.totalRealAchat = this.totalRealLoc = this.totalRealTech = 0
       this.$store.getters.budgets.forEach((budget) => {
         if (budget.events.start_datetime >= this.dateDebut && budget.events.start_datetime <= this.dateFin) {
           this.budgetTrie.push(budget)
