@@ -29,7 +29,8 @@
                   <div :class="ligne.colorcss" class="ui pointing below label">Il reste {{ ligne.diff }} jours</div>
                   <div class="header">{{ ligne.designation }}</div>
                   {{ ligne.organism }}
-                  {{ ligne.datevisitewarning }}
+                  <span v-if="ligne.nextVisite != ligne.datevisitewarning">Prochaine visite le : {{ ligne.nextVisite }}</span>
+                  <span v-else>Visite à prévoir !!!</span>
                 </div>
                 <div class="floating ui red label">22</div>
               </div>
