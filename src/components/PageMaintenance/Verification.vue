@@ -27,7 +27,7 @@
             {{ ligne.designation }}
           </td>
           <td>{{ ligne.lastVisite }}</td>
-          <td>{{ ligne.nextVisite }}<i v-if="ligne.nextVisite != ligne.datevisitewarning"class="green large table icon"></i></td>
+          <td><i v-if="ligne.nextVisite != ligne.datevisitewarning"class="orange large checked calendar icon"></i>{{ ligne.nextVisite }}</td>
           <td>{{ ligne.datevisitewarning }}</td>
           <td>{{ ligne.organism }}</td>
           <td>{{ ligne.periodicity }}</td>
