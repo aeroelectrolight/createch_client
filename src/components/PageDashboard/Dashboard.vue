@@ -1,8 +1,46 @@
 <style>
+.ui.label {
+  margin-bottom: 5px;
+}
+.uper {
+
+}
 </style>
 
 <template>
   <div class="">
+    <table class="ui orange table">
+      <thead>
+        <tr>
+          <th>
+            Verifications
+          </th>
+          <th>
+            Maintenances
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="ui list">
+              <div class="item" v-for="ligne in verifications">
+                <div class="content">
+                  <div :class="ligne.colorcss" class="ui pointing below label">Il reste {{ ligne.diff }} jours</div>
+                  <div class="header">{{ ligne.designation }}</div>
+                  {{ ligne.organism }}
+                  {{ ligne.datevisitewarning }}
+                </div>
+                <div class="floating ui red label">22</div>
+              </div>
+            </div>
+          </td>
+          <td>
+            test
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <h1 class="ui header">Dashboard</h1>
     <svg></svg>
   </div>
@@ -10,6 +48,8 @@
 
 <script type="text/javascript">
 import * as d3 from 'd3'
+
+import moment from 'moment'
 
 var donnees = [8, 9, 15, 30, 10, 3]
 var largeur = 960
@@ -19,6 +59,29 @@ export default {
   computed: {
     couleurs () {
       return this.$store.getters.couleurs
+    },
+    verifications () {
+      let array = this.$store.getters.verifications
+      let newarray = []
+      array.forEach((ligne) => {
+        let colorcss = ''
+        let datevisitewarning = moment(ligne.last_visite).add(ligne.periodicity, 'month')
+        if (moment() > datevisitewarning.subtract(ligne.alert_delay, 'days')) {
+          if (moment() < moment(ligne.last_visite).add(ligne.periodicity, 'month')) {
+            colorcss = 'orange'
+          } else {
+            colorcss = 'red'
+          }
+          let diff = moment(ligne.last_visite).add(ligne.periodicity, 'month').diff(moment(), 'days')
+          ligne.lastVisite = moment(ligne.last_visite).format('L')
+          ligne.datevisitewarning = moment(ligne.last_visite).add(ligne.periodicity, 'month').format('L')
+          ligne.nextVisite = moment(ligne.next_visite).format('L')
+          ligne.colorcss = colorcss
+          ligne.diff = diff
+          newarray.push(ligne)
+        }
+      })
+      return newarray
     }
   },
   mounted () {
